@@ -112,15 +112,66 @@ void mergeSort(std::vector<int> &arr, int start, int end) {
     }
 }
 
-int main() {
-    std::vector<int> arr = {12, 11, 15, 10, 9, 1, 2, 3, 13, 14, 4, 5, 6, 7, 8};
-    mergeSort(arr, 0, static_cast<int>(arr.size() - 1));
-    for (int i; i < arr.size(); i++) {
-        std::cout << arr[i];
-        if (i < arr.size() - 1) std::cout << ", ";
-    }
-    cout<<endl;
+//-------------------------------------------------------------
+//Quick Sort
+//-------------------------------------------------------------
+
+// last element is taken as pivot
+int Partition(vector<int> &v, int start, int end){
+	
+	int pivot = end;
+	int j = start;
+	for(int i=start;i<end;++i){
+		if(v[i]<v[pivot]){
+			swap(v[i],v[j]);
+			++j;
+		}
+	}
+	swap(v[j],v[pivot]);
+	return j;
+	
 }
+
+void Quicksort(vector<int> &v, int start, int end ){
+
+	if(start<end){
+		int p = Partition(v,start,end);
+		Quicksort(v,start,p-1);
+		Quicksort(v,p+1,end);
+	}
+	
+}
+
+void PrintVector(vector<int> v){
+	for(int i=0;i<v.size();++i)
+		cout<<v[i]<<" ";
+	cout<<"\n\n";
+}
+
+int main() {
+	
+	vector<int> v = { 1 , 10 , 11 , 9 , 14 , 3 , 2 , 20 , 19 };
+	
+	cout<<"Vector Before Sorting: "<<endl;
+	PrintVector(v);
+	
+	Quicksort(v,0,v.size()-1);
+	
+	cout<<"Vector After Sorting: "<<endl;
+	PrintVector(v);
+		
+}
+
+//Main Driver for MergeSort
+// int main() {
+//     std::vector<int> arr = {12, 11, 15, 10, 9, 1, 2, 3, 13, 14, 4, 5, 6, 7, 8};
+//     mergeSort(arr, 0, static_cast<int>(arr.size() - 1));
+//     for (int i; i < arr.size(); i++) {
+//         std::cout << arr[i];
+//         if (i < arr.size() - 1) std::cout << ", ";
+//     }
+//     cout<<endl;
+// }
 
 //Main Driver for Insertion Sort
 // int main()
